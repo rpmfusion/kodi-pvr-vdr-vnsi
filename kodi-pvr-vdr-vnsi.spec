@@ -1,6 +1,6 @@
-%global commit 7a17f8956734b38bffbb1c5d41e515a00144ca52
+%global commit 4ed7d602924dbfcdd2770c0e13423092e829460d
 %global short_commit %(c=%{commit}; echo ${c:0:7})
-%global commit_date 20170324
+%global commit_date 20170506
 
 %global kodi_addon pvr.vdr.vnsi
 %global kodi_version 17.0
@@ -9,7 +9,7 @@ Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        2.6.20
+Version:        2.6.21
 Release:        1%{?dist}
 Summary:        Kodi PVR addon VNSI
 
@@ -59,6 +59,9 @@ cp -p %{SOURCE1} .
 
 
 %changelog
+* Sat May 06 2017 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:2.6.21-1
+- Update to 2.6.21
+
 * Wed Apr 26 2017 Mohamed El Morabity <melmorabity@fedorapeople.org> - 1:2.6.20-1
 - Update to latest stable release for Kodi 17
 
