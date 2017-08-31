@@ -10,7 +10,7 @@ Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
 Version:        2.6.21
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Kodi PVR addon VNSI
 
 Group:          Applications/Multimedia
@@ -59,6 +59,9 @@ cp -p %{SOURCE1} .
 
 
 %changelog
+* Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1:2.6.21-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
 * Sat May 06 2017 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:2.6.21-1
 - Update to 2.6.21
 
