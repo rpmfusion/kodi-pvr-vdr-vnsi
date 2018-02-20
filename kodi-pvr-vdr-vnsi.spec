@@ -1,6 +1,6 @@
-%global commit 4ed7d602924dbfcdd2770c0e13423092e829460d
+%global commit e8f82898bc0eb2a7d677f054f5f53e1caa4f1107
 %global short_commit %(c=%{commit}; echo ${c:0:7})
-%global commit_date 20170506
+%global commit_date 20180205
 
 %global kodi_addon pvr.vdr.vnsi
 %global kodi_version 17.0
@@ -9,8 +9,8 @@ Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        2.6.21
-Release:        2%{?dist}
+Version:        2.6.25
+Release:        1%{?dist}
 Summary:        Kodi PVR addon VNSI
 
 Group:          Applications/Multimedia
@@ -59,6 +59,9 @@ cp -p %{SOURCE1} .
 
 
 %changelog
+* Tue Feb 20 2018 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:2.6.25-1
+- Update to 2.6.25
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1:2.6.21-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
