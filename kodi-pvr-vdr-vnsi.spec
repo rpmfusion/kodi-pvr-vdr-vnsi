@@ -1,28 +1,29 @@
-%global commit 129aa393769ca97b7da2d575db4509522ff0929b
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global commitdate 20180722
-
 %global kodi_addon pvr.vdr.vnsi
 %global kodi_version 18.0
+%global kodi_codename Leia
 
 Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        3.6.0
-Release:        4%{?dist}
+Version:        3.6.3
+Release:        1%{?dist}
 Summary:        VDR PVR for Kodi
 
 License:        GPLv2+
-URL:            https://github.com/FernetMenta/%{kodi_addon}/
-Source0:        https://github.com/FernetMenta/%{kodi_addon}/archive/%{shortcommit}/%{kodi_addon}-%{shortcommit}.tar.gz
+URL:            https://github.com/kodi-pvr/%{kodi_addon}/
+Source0:        %{url}/archive/%{version}-%{kodi_codename}/%{kodi_addon}-%{version}.tar.gz
 
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  kodi-devel >= %{kodi_version}
 BuildRequires:  kodi-platform-devel >= %{kodi_version}
-BuildRequires:  mesa-libGL-devel
 BuildRequires:  platform-devel
+%ifarch %{arm}
+BuildRequires:  mesa-libGLES-devel
+%else
+BuildRequires:  mesa-libGL-devel
+%endif
 Requires:       kodi >= %{kodi_version}
 ExcludeArch:    %{power64} ppc64le
 
@@ -31,7 +32,7 @@ ExcludeArch:    %{power64} ppc64le
 
 
 %prep
-%autosetup -n %{kodi_addon}-%{commit}
+%autosetup -n %{kodi_addon}-%{version}-%{kodi_codename}
 
 
 %build
@@ -50,6 +51,9 @@ ExcludeArch:    %{power64} ppc64le
 
 
 %changelog
+* Mon Jan 13 2020 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:3.6.3-1
+- Update to 3.6.3
+
 * Fri Aug 09 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1:3.6.0-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
 
