@@ -1,15 +1,13 @@
 %global kodi_addon pvr.vdr.vnsi
-%global kodi_version 18.0
-%global kodi_codename Leia
-
-%undefine __cmake_in_source_build
+%global kodi_version 19.0
+%global kodi_codename Matrix
 
 Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        3.6.3
-Release:        3%{?dist}
+Version:        6.0.0
+Release:        1%{?dist}
 Summary:        VDR PVR for Kodi
 
 License:        GPLv2+
@@ -19,12 +17,11 @@ Source0:        %{url}/archive/%{version}-%{kodi_codename}/%{kodi_addon}-%{versi
 BuildRequires:  cmake3
 BuildRequires:  gcc-c++
 BuildRequires:  kodi-devel >= %{kodi_version}
-BuildRequires:  kodi-platform-devel >= %{kodi_version}
-BuildRequires:  platform-devel
+BuildRequires:  pkgconfig(p8-platform)
 %ifarch %{arm}
-BuildRequires:  mesa-libGLES-devel
+BuildRequires:  pkgconfig(opengles)
 %else
-BuildRequires:  mesa-libGL-devel
+BuildRequires:  pkgconfig(opengl)
 %endif
 Requires:       kodi >= %{kodi_version}
 ExcludeArch:    %{power64} ppc64le
@@ -47,12 +44,16 @@ ExcludeArch:    %{power64} ppc64le
 
 
 %files
-%doc README.md
+%doc README.md %{kodi_addon}/changelog.txt
+%license LICENSE.md
 %{_libdir}/kodi/addons/%{kodi_addon}/
 %{_datadir}/kodi/addons/%{kodi_addon}/
 
 
 %changelog
+* Thu Aug 20 2020 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:6.0.0-1
+- Update to 6.0.0 (switch to Matrix branch)
+
 * Tue Aug 18 2020 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1:3.6.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
