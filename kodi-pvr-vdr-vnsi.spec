@@ -18,8 +18,8 @@ BuildRequires:  cmake3
 BuildRequires:  gcc-c++
 BuildRequires:  kodi-devel >= %{kodi_version}
 BuildRequires:  pkgconfig(p8-platform)
-%ifarch %{arm}
-BuildRequires:  pkgconfig(opengles)
+%ifarch %{arm} aarch64
+BuildRequires:  mesa-libGLES-devel
 %else
 BuildRequires:  pkgconfig(opengl)
 %endif
