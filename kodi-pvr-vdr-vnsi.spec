@@ -6,7 +6,7 @@ Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        6.0.0
+Version:        8.1.0
 Release:        1%{?dist}
 Summary:        VDR PVR for Kodi
 
@@ -17,9 +17,8 @@ Source0:        %{url}/archive/%{version}-%{kodi_codename}/%{kodi_addon}-%{versi
 BuildRequires:  cmake3
 BuildRequires:  gcc-c++
 BuildRequires:  kodi-devel >= %{kodi_version}
-BuildRequires:  pkgconfig(p8-platform)
 %ifarch %{arm} aarch64
-BuildRequires:  mesa-libGLES-devel
+BuildRequires:  libglvnd-devel
 %else
 BuildRequires:  pkgconfig(opengl)
 %endif
@@ -51,6 +50,9 @@ ExcludeArch:    %{power64} ppc64le
 
 
 %changelog
+* Mon Nov 16 2020 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:8.1.0-1
+- Update to 8.1.0
+
 * Thu Aug 20 2020 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:6.0.0-1
 - Update to 6.0.0 (switch to Matrix branch)
 
