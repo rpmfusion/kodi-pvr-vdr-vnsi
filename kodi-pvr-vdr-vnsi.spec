@@ -7,7 +7,7 @@ Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
 Version:        8.2.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        VDR PVR for Kodi
 
 License:        GPLv2+
@@ -50,6 +50,9 @@ ExcludeArch:    %{power64} ppc64le
 
 
 %changelog
+* Wed Feb 03 2021 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1:8.2.2-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Fri Jan 29 2021 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:8.2.2-1
 - Update to 8.2.2
 
