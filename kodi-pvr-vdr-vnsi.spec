@@ -1,29 +1,29 @@
 %global kodi_addon pvr.vdr.vnsi
-%global kodi_version 19.0
-%global kodi_codename Matrix
+%global kodi_version 20
+%global kodi_codename Nexus
 
 Name:           kodi-%(tr "." "-" <<<%{kodi_addon})
 # Use Epoch to manage upgrades from older upstream
 # (https://github.com/opdenkamp/xbmc-pvr-addons/)
 Epoch:          1
-Version:        8.2.3
-Release:        4%{?dist}
+Version:        20.4.0
+Release:        1%{?dist}
 Summary:        VDR PVR for Kodi
 
-License:        GPLv2+
+# lib/kissnet is MIT
+License:        GPL-2.0-or-later AND MIT
 URL:            https://github.com/kodi-pvr/%{kodi_addon}/
 Source0:        %{url}/archive/%{version}-%{kodi_codename}/%{kodi_addon}-%{version}.tar.gz
+Source1:        %{name}.metainfo.xml
 
 BuildRequires:  cmake3
 BuildRequires:  gcc-c++
 BuildRequires:  kodi-devel >= %{kodi_version}
-%ifarch %{arm} aarch64
-BuildRequires:  libglvnd-devel
-%else
+BuildRequires:  libappstream-glib
 BuildRequires:  pkgconfig(opengl)
-%endif
 Requires:       kodi >= %{kodi_version}
-ExcludeArch:    %{power64} ppc64le
+Provides:       bundled(kissnet)
+ExcludeArch:    %{power64}
 
 %description
 %{summary}.
@@ -41,15 +41,28 @@ ExcludeArch:    %{power64} ppc64le
 %install
 %cmake3_install
 
+# Install AppData file
+install -Dpm 0644 %{SOURCE1} $RPM_BUILD_ROOT%{_metainfodir}/%{name}.metainfo.xml
+
+
+%check
+appstream-util validate-relax --nonet $RPM_BUILD_ROOT%{_metainfodir}/%{name}.metainfo.xml
+
 
 %files
 %doc README.md %{kodi_addon}/changelog.txt
 %license LICENSE.md
 %{_libdir}/kodi/addons/%{kodi_addon}/
 %{_datadir}/kodi/addons/%{kodi_addon}/
+%{_metainfodir}/%{name}.metainfo.xml
 
 
 %changelog
+* Sun Jan 29 2023 Mohamed El Morabity <melmorabity@fedoraproject.org> - 1:20.4.0-1
+- Update to 20.4.0
+- Add AppStream metadata
+- Switch to SPDX license identifiers
+
 * Sun Aug 07 2022 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1:8.2.3-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild and ffmpeg
   5.1
